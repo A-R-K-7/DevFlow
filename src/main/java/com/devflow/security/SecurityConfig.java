@@ -21,8 +21,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * Central Spring Security configuration.
  *
- * <p>Configures stateless JWT authentication, CSRF protection (disabled for REST APIs),
- * role-based endpoint authorization, and the custom JWT filter chain.</p>
+ * <p>
+ * Configures stateless JWT authentication, CSRF protection (disabled for REST
+ * APIs),
+ * role-based endpoint authorization, and the custom JWT filter chain.
+ * </p>
  */
 @Configuration
 @EnableWebSecurity
@@ -58,29 +61,32 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/api-docs/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/api-docs/**", "/v3/api-docs/**")
+                        .permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
+                        .requestMatchers("/", "/index.html", "/css/**", "/js/**", "/assets/**", "/favicon.ico",
+                                "/favicon.svg", "/icons.svg")
+                        .permitAll()
 
                         // Project management
                         .requestMatchers(HttpMethod.POST, "/api/projects/**")
-                            .hasAnyRole("ADMIN", "DEVELOPER")
+                        .hasAnyRole("ADMIN", "DEVELOPER")
                         .requestMatchers(HttpMethod.DELETE, "/api/projects/**")
-                            .hasRole("ADMIN")
+                        .hasRole("ADMIN")
 
                         // Deployment management
                         .requestMatchers(HttpMethod.PUT, "/api/deployments/*/status")
-                            .hasAnyRole("ADMIN", "RELEASE_MANAGER")
+                        .hasAnyRole("ADMIN", "RELEASE_MANAGER")
 
                         // Team management
                         .requestMatchers(HttpMethod.POST, "/api/teams/**")
-                            .hasAnyRole("ADMIN", "RELEASE_MANAGER")
+                        .hasAnyRole("ADMIN", "RELEASE_MANAGER")
                         .requestMatchers(HttpMethod.DELETE, "/api/teams/**")
-                            .hasRole("ADMIN")
+                        .hasRole("ADMIN")
 
                         // All other endpoints require authentication
-                        .anyRequest().authenticated()
-                );
+                        .anyRequest().authenticated());
 
         // Add JWT filter before Spring's default auth filter
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
