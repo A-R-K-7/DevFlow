@@ -1,0 +1,38 @@
+# Build
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDE
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maven
+log/
+*.log
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Environment
+.env
+*.env.local
+
+# H2 Database
+*.db
+*.trace.db
+*.lock.db

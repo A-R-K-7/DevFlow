@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: devflow-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devflow_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - devflow-mysql-data:/var/lib/mysql
+    networks:
+      - devflow-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # DevFlow Spring Boot Application
+  devflow-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devflow-api
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: jdbc:mysql://mysql:3306/devflow_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      JWT_SECRET: DevFlowProductionSecretKeyMustBeAtLeast256BitsLongForSecurity2024Enterprise
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - "8080:8080"
+    networks:
+      - devflow-network
+
+volumes:
+  devflow-mysql-data:
+
+networks:
+  devflow-network:
+    driver: bridge
