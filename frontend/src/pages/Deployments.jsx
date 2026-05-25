@@ -131,7 +131,7 @@ export default function Deployments() {
       labelColor = 'text-accent-emerald';
     }
     else if (isActiveNodeRunning(nodeName)) {
-      ringColor = 'border-white text-white bg-white/10 shadow-indigo animate-pulse-ring';
+      ringColor = 'border-white text-white bg-white/10 shadow-primary animate-pulse-ring';
       labelColor = 'text-white';
       hasPulse = true;
     }
@@ -165,7 +165,7 @@ export default function Deployments() {
       return `${styles} opacity-100 bg-accent-emerald shadow-emerald`;
     }
     if (activeIdx === connectorIdx) {
-      return `${styles} opacity-100 bg-white shadow-indigo animate-pulse`;
+      return `${styles} opacity-100 bg-white shadow-primary animate-pulse`;
     }
 
     return styles;
@@ -247,7 +247,7 @@ export default function Deployments() {
         <div className="flex items-center justify-between border-b border-border-glass pb-4">
           <h3 className="font-branding text-sm font-bold text-white uppercase tracking-wider">Active Pipeline Flow</h3>
           {activeDeploymentId && (
-            <span className="font-mono text-xs font-bold text-text-link bg-white/10 px-3 py-1 rounded-full border border-white/20 shadow-indigo">
+            <span className="font-mono text-xs font-bold text-text-link bg-white/10 px-3 py-1 rounded-full border border-white/20 shadow-primary">
               DEPLOYMENT #{activeDeploymentId}
             </span>
           )}
