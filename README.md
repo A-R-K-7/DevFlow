@@ -20,7 +20,7 @@ DevFlow is an enterprise-grade backend platform designed to help software teams 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        CLIENT LAYER                             │
-│              (Swagger UI / REST Clients / WebSocket)            │
+│       (React SPA / Swagger UI / REST Clients / WebSocket)       │
 └────────────────────────────┬────────────────────────────────────┘
                              │
 ┌────────────────────────────▼────────────────────────────────────┐
@@ -79,6 +79,18 @@ DevFlow is an enterprise-grade backend platform designed to help software teams 
 
 ## 🛠️ Tech Stack
 
+### Frontend
+| Technology | Purpose |
+|---|---|
+| React 19 | Frontend library |
+| Vite | Frontend build tool |
+| Tailwind CSS | UI styling and responsive design |
+| Framer Motion | Smooth UI animations and transitions |
+| Recharts | Data visualization for dashboard |
+| React Router v7 | Client-side routing |
+| Axios & SockJS/STOMP | API and real-time WebSocket communication |
+
+### Backend
 | Technology | Purpose |
 |---|---|
 | Java 17 | Core language |
@@ -149,6 +161,7 @@ DevFlow is an enterprise-grade backend platform designed to help software teams 
 
 ### Quick Start (H2 - No MySQL Required)
 
+#### 1. Start the Backend
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/devflow.git
@@ -156,6 +169,18 @@ cd devflow
 
 # Run with H2 in-memory database
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+```
+
+#### 2. Start the Frontend
+```bash
+# Open a new terminal
+cd devflow/frontend
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
 ```
 
 ### With MySQL
@@ -178,6 +203,7 @@ docker-compose up --build
 ```
 
 ### Access Points
+- **Frontend Dashboard**: http://localhost:5173
 - **API Base URL**: http://localhost:8080
 - **Swagger UI**: http://localhost:8080/swagger-ui.html
 - **H2 Console (dev)**: http://localhost:8080/h2-console
@@ -305,7 +331,7 @@ src/main/java/com/devflow/
 - [ ] Environment-specific configuration management
 - [ ] Metrics and monitoring (Prometheus + Grafana)
 - [ ] Multi-tenant support
-- [ ] Frontend dashboard (React/Angular)
+- [x] Frontend dashboard (React/Vite/Tailwind)
 
 ---
 
