@@ -341,4 +341,3 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ---
 
-<p align="center">Built with ❤️ using Spring Boot 3 & Java 17</p>
